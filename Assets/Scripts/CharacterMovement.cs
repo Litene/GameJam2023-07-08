@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour {
     public Transform _cam;
     private Rigidbody _rb;
 
-    public float Speed = 30.0f;
+    public float Speed = 1000.0f;
     public float TurnSpeed = 0.1f;
     private float _turnSpeedVelocity;
 
