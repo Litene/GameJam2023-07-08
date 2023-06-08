@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CharacterMovement : MonoBehaviour
-{
+public class CharacterMovement : MonoBehaviour {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CharacterController _characterController;
+    public Transform _cam;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public float Speed = 6.0f;
+    public float TurnSpeed = 0.1f;
+    private float _turnSpeedVelocity;
+    private void Update() {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float Vertical = Input.GetAxisRaw("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0, Vertical);
+
+        if (direction.magnitude >= 0.1f) {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSpeedVelocity, Speed);
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+            _characterController.Move(direction * Speed * Time.deltaTime);
+        }
     }
 }
