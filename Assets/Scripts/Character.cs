@@ -9,6 +9,7 @@ public class Character : MonoBehaviour {
     private Vector3 GrowthMulti = new Vector3(1, 1, 1);
     private float CoolDown = 3.0f;
     private float CoolTimer = 0;
+    private CharacterMovement _movement;
 
     public float Size {
         get { return _size; }
@@ -24,13 +25,14 @@ public class Character : MonoBehaviour {
     private void Grow(float size) {
         if (CoolTimer > CoolDown) {
             CoolTimer = 0;
-            transform.localScale = GrowthMulti * size;
+            _movement.Speed = size * 500;
         }
     }
 
     // Start is called before the first frame update
     void Start() {
         transform.localScale = GrowthMulti * _size;
+        _movement = GetComponent<CharacterMovement>();
     }
 
     private void Death() {
