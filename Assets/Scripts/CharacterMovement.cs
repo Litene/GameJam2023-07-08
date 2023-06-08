@@ -28,12 +28,12 @@ public class CharacterMovement : MonoBehaviour {
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSpeedVelocity, Speed);
             transform.rotation = Quaternion.Euler(0, angle, 0);
             Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-            _characterController.Move(moveDir.normalized + Gravity() * Speed * Time.deltaTime);
+            _characterController.Move(moveDir.normalized * Speed * Time.deltaTime);
             
     }
 
-    private Vector3 Gravity() {
-        return new Vector3(0, -0.3f, 0);
+    private void Gravity() {
+        _rb.velocity = new Vector3(0, -0.3f, 0);
     }
     
     private void FixedUpdate() {
