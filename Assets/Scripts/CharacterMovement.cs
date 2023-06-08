@@ -13,16 +13,15 @@ public class CharacterMovement : MonoBehaviour {
     public float TurnSpeed = 0.1f;
     private float _turnSpeedVelocity;
     private void Update() {
-        float horizontal = Input.GetAxisRaw("Horizontal");
         float Vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0, Vertical);
+        Vector3 direction = new Vector3(0, 0, Vertical);
 
-        if (direction.magnitude >= 0.1f) {
+        
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSpeedVelocity, Speed);
             transform.rotation = Quaternion.Euler(0, angle, 0);
             Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             _characterController.Move(moveDir.normalized * Speed * Time.deltaTime);
-        }
+        
     }
 }
