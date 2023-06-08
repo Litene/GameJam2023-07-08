@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour {
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSpeedVelocity, Speed);
             transform.rotation = Quaternion.Euler(0, angle, 0);
             Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-            _characterController.Move(moveDir.normalized * Speed * Time.deltaTime);
+            _characterController.SimpleMove(moveDir.normalized * Speed * Time.deltaTime);
             
     }
 
