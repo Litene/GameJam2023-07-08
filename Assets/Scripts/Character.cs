@@ -15,7 +15,7 @@ public class Character : MonoBehaviour {
         set {
             _size = value;
             Grow(_size);
-            if (_size == 0) {
+            if (_size <= 0) {
                 Death();
             }
         }
@@ -34,6 +34,7 @@ public class Character : MonoBehaviour {
     }
 
     private void Death() {
+        Debug.Log("Dead");
         Application.Quit();
     }
 
