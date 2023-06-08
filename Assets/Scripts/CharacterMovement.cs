@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour {
     public CharacterController _characterController;
     public Transform _cam;
 
-    public float Speed = 6.0f;
+    public float Speed = 30.0f;
     public float TurnSpeed = 0.1f;
     private float _turnSpeedVelocity;
     private void Update() {
@@ -21,7 +21,8 @@ public class CharacterMovement : MonoBehaviour {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSpeedVelocity, Speed);
             transform.rotation = Quaternion.Euler(0, angle, 0);
-            _characterController.Move(direction * Speed * Time.deltaTime);
+            Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+            _characterController.Move(moveDir.normalized * Speed * Time.deltaTime);
         }
     }
 }
