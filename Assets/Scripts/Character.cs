@@ -25,7 +25,7 @@ public class Character : MonoBehaviour {
     private void Grow(float size) {
         if (CoolTimer > CoolDown) {
             CoolTimer = 0;
-            _movement.Speed = size * 500;
+            _movement.Speed = (10 - size) * 500;
         }
     }
 
